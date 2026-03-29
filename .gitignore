@@ -1,0 +1,8 @@
+.DS_Store
+deploy.sh
+DEPLOYMENT_GUIDE.md
+# Ignore local environment files or backups
+*.bak
+*.old
+node_modules/
+.env

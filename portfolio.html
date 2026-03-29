@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidney Losbañes | Portfolio</title>
+  <meta name="description" content="Professional portfolio of Sidney Losbañes, Senior IT Specialist and Technical Operations Supervisor." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* =============================================
+       CSS RESET & VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── Colors (Dark - Default) ── */
+      --bg:          #060b18;
+      --bg-2:        #0b1120;
+      --bg-3:        #0f1729;
+      --card:        #111827;
+      --card-hover:  #161f35;
+      --border:      rgba(59,130,246,0.12);
+      --border-hi:   rgba(59,130,246,0.35);
+
+      --blue:        #3b82f6;
+      --blue-dim:    #2563eb;
+      --blue-glow:   rgba(59,130,246,0.22);
+      --cyan:        #06b6d4;
+      --cyan-glow:   rgba(6,182,212,0.15);
+      --violet:      #8b5cf6;
+      --gold:        #f59e0b;
+      --success:     #22c55e;
+      --danger:      #ef4444;
+
+      --text:        #e2e8f0;
+      --muted:       #94a3b8;
+      --dim:         #64748b;
+      --white:       #ffffff;
+
+      --font-body:   'Inter', sans-serif;
+      --font-display:'Playfair Display', serif;
+      --radius:      14px;
+      --radius-sm:   8px;
+
+      --nav-bg:      rgba(6,11,24,0.92);
+    }
+
+    body.light-mode {
+      --bg:          #f0f4f9;
+      --bg-2:        #ffffff;
+      --bg-3:        #e2e8f0;
+      --card:        #ffffff;
+      --card-hover:  #f8fafc;
+      --border:      rgba(59,130,246,0.1);
+      --border-hi:   rgba(59,130,246,0.2);
+      --text:        #1e293b;
+      --muted:       #475569;
+      --dim:         #64748b;
+      --white:       #0f172a;
+      --nav-bg:      rgba(255,255,255,0.92);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+
+    /* =============================================
+       UTILITY CLASSES
+    ============================================= */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-alt {
+      background: var(--bg-2);
+      border-top:    1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible  { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.10s; }
+    .reveal-delay-2 { transition-delay: 0.20s; }
+    .reveal-delay-3 { transition-delay: 0.30s; }
+    .reveal-delay-4 { transition-delay: 0.40s; }
+
+    /* Section label above heading */
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .label::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    /* Large section title */
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-title span {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+
+    .navbar.scrolled {
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-avatar {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .nav-logo-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .nav-logo-role {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(59,130,246,0.1);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dim));
+      color: var(--white);
+      box-shadow: 0 4px 16px var(--blue-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(59,130,246,0.38);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border-hi);
+    }
+    .btn-outline:hover {
+      background: rgba(59,130,246,0.08);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 14px;
+    }
+    .btn-ghost:hover { color: var(--white); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(6,11,24,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 20px;
+      z-index: 999;
+    }
+
+    .mobile-nav.open { display: block; }
+
+    .mobile-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav ul a {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .mobile-nav ul a:hover {
+      color: var(--white);
+      background: rgba(59,130,246,0.1);
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* animated background grid */
+    #home::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    /* glow blobs */
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .hero-glow-1 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);
+      top: -80px; left: -120px;
+    }
+
+    .hero-glow-2 {
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+      bottom: 60px; right: -60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ── Left ── */
+
+
+    .hero-available {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--success);
+      margin-bottom: 20px;
+    }
+
+    .hero-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.6; transform: scale(1.3); }
+    }
+
+    .hero-name {
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-name span {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-desc {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-contact-row i {
+      width: 32px; height: 32px;
+      border-radius: var(--radius-sm);
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* ── Right (Card) ── */
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border-hi);
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .hero-card-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+      font-family: var(--font-display);
+      letter-spacing: -1px;
+      overflow: hidden;
+      border: 2px solid var(--border-hi);
+    }
+
+    .hero-card-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-card-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .hero-card-role {
+      font-size: 0.82rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-stat {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-num span { color: var(--blue); }
+
+    .hero-stat-label {
+      font-size: 0.68rem;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .hero-cert {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-cert-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-cert-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .hero-cert-sub {
+      font-size: 0.68rem;
+      color: var(--dim);
+    }
+
+    /* =============================================
+       ABOUT / PROFILE SECTION
+    ============================================= */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .highlight-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .highlight-card:hover {
+      border-color: var(--border-hi);
+      transform: translateX(4px);
+    }
+
+    .highlight-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .hi-blue   { background: rgba(59,130,246,0.12);  color: var(--blue); }
+    .hi-cyan   { background: rgba(6,182,212,0.12);   color: var(--cyan); }
+    .hi-violet { background: rgba(139,92,246,0.12);  color: var(--violet); }
+    .hi-gold   { background: rgba(245,158,11,0.12);  color: var(--gold); }
+    .hi-green  { background: rgba(34,197,94,0.12);   color: var(--success); }
+
+    .highlight-text h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .highlight-text p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+
+
+    .about-bio {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .about-bio strong { color: var(--text); }
+
+    .about-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .info-row .info-key {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+    }
+
+    .info-row .info-val {
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .info-row .info-val a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .info-row .info-val a:hover { text-decoration: underline; }
+
+    /* =============================================
+       EXPERIENCE / TIMELINE
+    ============================================= */
+    #experience .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    #experience .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--blue), var(--border));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    /* the dot on the line */
+    .timeline-dot {
+      position: absolute;
+      left: -34px;
+      top: 6px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid var(--bg-2);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+      z-index: 1;
+    }
+
+    .timeline-dot.current {
+      background: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(6,182,212,0.3), 0 0 16px rgba(6,182,212,0.4);
+    }
+
+    .timeline-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .timeline-card:hover {
+      border-color: var(--border-hi);
+      box-shadow: 0 8px 32px rgba(59,130,246,0.08);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .timeline-period {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border-hi);
+      border-radius: 20px;
+      padding: 3px 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .timeline-period.current-badge {
+      color: var(--cyan);
+      background: rgba(6,182,212,0.1);
+      border-color: rgba(6,182,212,0.3);
+    }
+
+    /* Freelance / personal project badge */
+    .freelance-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(245,158,11,0.09);
+      border: 1px solid rgba(245,158,11,0.28);
+      border-radius: 20px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Freelance card gets a subtle gold top border */
+    .timeline-card.freelance {
+      border-color: rgba(245,158,11,0.18);
+    }
+
+    .timeline-card.freelance:hover {
+      border-color: rgba(245,158,11,0.38);
+      box-shadow: 0 8px 32px rgba(245,158,11,0.07);
+    }
+
+    /* Sub-roles (multiple roles in one company) */
+    .timeline-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .timeline-role {
+      border-left: 2px solid var(--border-hi);
+      padding-left: 16px;
+    }
+
+    .timeline-role-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .role-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .role-period {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg-3);
+      border-radius: 20px;
+      padding: 2px 8px;
+    }
+
+    /* Single role */
+    .timeline-single-role {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .timeline-desc {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .timeline-desc li {
+      font-size: 0.84rem;
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .timeline-desc li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 0.8rem;
+    }
+
+    /* =============================================
+       SKILLS SECTION
+    ============================================= */
+    #skills .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    /* Skill bars */
+    .skill-bars { display: flex; flex-direction: column; gap: 20px; }
+
+    .skill-bar {}
+
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar-name {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .skill-bar-pct {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .skill-bar-track {
+      height: 6px;
+      background: var(--bg-3);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Skill tag cloud */
+    .skill-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 620px;         /* keeps it aligned with the bars column */
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue) transparent;
+    }
+
+    .skill-cat-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 13px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: var(--border-hi);
+      color: var(--white);
+    }
+
+    .skill-tag i { font-size: 0.72rem; color: var(--blue); }
+
+    /* =============================================
+       EDUCATION SECTION
+    ============================================= */
+    #education .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+      gap: 20px;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 24px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-4px);
+    }
+
+    .edu-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .edu-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .edu-type {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3px;
+    }
+
+    .edu-school {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.25;
+    }
+
+    .edu-program {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .edu-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .edu-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .edu-badge.year  {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border-hi);
+      color: var(--blue);
+    }
+
+    .edu-badge.award {
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--gold);
+    }
+
+    .edu-badge.cert {
+      background: rgba(139,92,246,0.1);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: var(--violet);
+    }
+
+    /* =============================================
+       REFERENCE SECTION
+    ============================================= */
+    #reference .ref-wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .ref-card {
+      background: var(--card);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ref-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .ref-quote-icon {
+      font-size: 2.5rem;
+      color: rgba(59,130,246,0.18);
+      margin-bottom: 10px;
+    }
+
+    .ref-avatar {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-dim), var(--violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 auto 14px;
+      font-family: var(--font-display);
+    }
+
+    .ref-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .ref-title {
+      font-size: 0.82rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .ref-company {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .ref-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .ref-phone:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: var(--border-hi);
+      color: var(--blue);
+    }
+
+    .ref-phone i { color: var(--blue); }
+
+    /* =============================================
+       CONTACT / CTA SECTION
+    ============================================= */
+    #contact {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-wrapper {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-wrapper .label { justify-content: center; }
+    .contact-wrapper .section-title { text-align: center; }
+    .contact-wrapper .section-sub { text-align: center; margin: 0 auto 36px; }
+
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 0.84rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .contact-chip:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: var(--border-hi);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .contact-chip i { color: var(--blue); font-size: 0.9rem; }
+
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.78rem;
+      color: var(--dim);
+    }
+
+    .footer-text span { color: var(--blue); }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .hero-content    { grid-template-columns: 1fr; gap: 40px; }
+      .hero-card       { max-width: 400px; }
+      #about .about-grid { grid-template-columns: 1fr; }
+      #skills .skills-grid { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger       { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 60px 0; }
+      .hero-name { font-size: 2.4rem; }
+      #education .edu-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+    }
+    /* Theme Toggle */
+    .theme-switch {
+      width: 40px;
+      height: 40px;
+      background: var(--card);
+      color: var(--blue);
+      border: 1px solid var(--border-hi);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      margin-left: 20px;
+    }
+    .theme-switch:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: var(--blue);
+      color: #fff;
+    }
+    .theme-switch svg { width: 18px; height: 18px; }
+    .sun-ico { display: none; }
+    .light-mode .sun-ico { display: block; }
+    .light-mode .moon-ico { display: none; }
+
+    /* Light mode Adjustments */
+    .light-mode #home::before {
+      background-image:
+        linear-gradient(rgba(59,130,246,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.1) 1px, transparent 1px);
+    }
+    .light-mode .hero-available { background: rgba(34,197,94,0.12); }
+    .light-mode .hero-cert { background: #f8fafc; }
+    .light-mode .highlight-icon { filter: brightness(0.9); }
+    .light-mode .timeline-card { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .light-mode .timeline-dot { border-color: #fff; }
+
+    /* Project Cards */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      transition: all 0.4s var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--blue);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .project-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(59,130,246,0.1);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--blue);
+    }
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      background: rgba(6,182,212,0.1);
+      padding: 4px 12px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+    .project-card h3 { font-size: 1.4rem; font-weight: 700; }
+    .project-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .tech-tag {
+        font-size: 0.7rem;
+        font-weight: 600;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--border);
+        padding: 2px 10px;
+        border-radius: 4px;
+    }
+    @media print {
+      .navbar, .theme-switch, .hamburger, .hero-actions, .mobile-nav {
+        display: none !important;
+      }
+      body { background: #fff !important; color: #000 !important; }
+      .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+      .section { padding: 20px 0 !important; border: none !important; }
+      .hero-name, .section-title span { color: #000 !important; background: none !important; -webkit-text-fill-color: black !important; }
+      .timeline-card, .highlight-card, .edu-card {
+        border-color: #eee !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
+      .navbar { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  
+
+
+<!-- =============================================
+     NAVBAR
+============================================= -->
+<nav class="navbar" id="navbar">
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-avatar">SL</div>
+    <div>
+      <div class="nav-logo-name">Sidney Losbañes</div>
+      <div class="nav-logo-role">Senior IT Specialist</div>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#reference">Reference</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+
+
+  <div id="theme-switch" class="theme-switch">
+    <svg class="moon-ico" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    <svg class="sun-ico" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </div>
+
+  <!-- Mobile hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#about"      onclick="closeMobile()">About</a></li>
+    <li><a href="#experience" onclick="closeMobile()">Experience</a></li>
+    <li><a href="#skills"     onclick="closeMobile()">Skills</a></li>
+    <li><a href="#education"  onclick="closeMobile()">Education</a></li>
+    <li><a href="#reference"  onclick="closeMobile()">Reference</a></li>
+    <li><a href="#contact"    onclick="closeMobile()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- =============================================
+     HERO SECTION
+============================================= -->
+<section id="home">
+  <!-- Background glows -->
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+
+  <div class="container">
+    <div class="hero-content">
+
+      <!-- Left -->
+      <div class="hero-left">
+        <!-- Available chip -->
+        <div class="hero-available">
+          <div class="hero-dot"></div>
+          Open to New Opportunities
+        </div>
+
+        <h1 class="hero-name">
+          Sidney<br /><span>Losbañes</span>
+        </h1>
+
+        <p class="hero-title">Senior IT Specialist · Tech Operations Supervisor · <span style="color:var(--cyan);">Vibe Coder</span></p>
+
+        <p class="hero-desc">
+          IT professional with <strong>18+ years</strong> of hands-on experience in
+          network administration, systems management, cloud infrastructure, and
+          technical leadership. A <strong>tech-savvy vibe coder</strong> who leverages
+          AI tools like Claude, Codex, Gemini &amp; more to build, automate, and deploy
+          real solutions. Google Workspace Certified.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#experience" class="btn btn-primary">
+            <i class="fa-solid fa-briefcase"></i> View Experience
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <i class="fa-solid fa-envelope"></i> Get in Touch
+          </a>
+        </div>
+
+        <!-- Contact rows -->
+        <div class="hero-contacts">
+          <div class="hero-contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <span>+63-9947076423</span>
+          </div>
+          <div class="hero-contact-row">
+            <i class="fa-solid fa-envelope"></i>
+            <span>sclosbanes@gmail.com</span>
+          </div>
+          <div class="hero-contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Lapu-Lapu City, Cebu, Philippines</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right card -->
+      <div class="hero-card reveal reveal-delay-2">
+        <div class="hero-card-avatar">
+          <img src="unnamed.jpg" alt="Sidney Losbañes">
+        </div>
+        <div class="hero-card-name">Sidney Losbañes</div>
+        <div class="hero-card-role">
+          <i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:4px;color:#22c55e;"></i>
+          Technical Operations Supervisor
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">18<span>+</span></div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">5<span>+</span></div>
+            <div class="hero-stat-label">Companies</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">12<span>+</span></div>
+            <div class="hero-stat-label">Branches Managed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">24<span>/7</span></div>
+            <div class="hero-stat-label">System Uptime Focus</div>
+          </div>
+        </div>
+
+        <div class="hero-cert">
+          <div class="hero-cert-icon">
+            <i class="fa-brands fa-google"></i>
+          </div>
+          <div>
+            <div class="hero-cert-text">Google Workspace Certified</div>
+            <div class="hero-cert-sub">Users · Domains · Org Settings · Content</div>
+          </div>
+        </div>
+
+        <!-- AI Tools badge -->
+        <div class="hero-cert" style="margin-top:10px;border-color:rgba(6,182,212,0.25);background:rgba(6,182,212,0.05);">
+          <div class="hero-cert-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3);color:var(--cyan);">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <div class="hero-cert-text">AI-Powered Vibe Coder</div>
+            <div class="hero-cert-sub">Claude · Codex · Gemini · Copilot</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     ABOUT / PROFILE
+============================================= -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left highlights -->
+      <div>
+        <div class="label reveal">Core Strengths</div>
+        <h2 class="section-title reveal">What I <span>Bring to the Table</span></h2>
+
+        <div class="about-highlights" style="margin-top:20px;">
+          <div class="highlight-card reveal reveal-delay-1">
+            <div class="highlight-icon hi-blue"><i class="fa-solid fa-network-wired"></i></div>
+            <div class="highlight-text">
+              <h4>Firewalls, Switches &amp; Network</h4>
+              <p>Hands-on with SonicWall, Sophos, pfSense, OPNsense, and Linux Firewall. Manages Cisco, Huawei, and Dell core switches, DHCP, VPNs, ISP/wireless, and full LAN/WAN.</p>
+            </div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-2">
+            <div class="highlight-icon hi-cyan"><i class="fa-brands fa-google"></i></div>
+            <div class="highlight-text">
+              <h4>Google Workspace Admin</h4>
+              <p>Manages Workspace at company scale: adding &amp; resetting users, updating content, org settings, and domain configurations.</p>
+            </div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-3">
+            <div class="highlight-icon hi-violet"><i class="fa-solid fa-cloud"></i></div>
+            <div class="highlight-text">
+              <h4>Cloud Hosting &amp; Domains</h4>
+              <p>Sets up websites, domains, cloud servers, and Cloudflare integration including DNS, CDN, DDoS protection, and SSL from scratch.</p>
+            </div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-4">
+            <div class="highlight-icon hi-gold"><i class="fa-solid fa-robot"></i></div>
+            <div class="highlight-text">
+              <h4>AI Vibe Coder &amp; Automation</h4>
+              <p>Uses Claude, Codex, Gemini, and Copilot to build real projects fast. Builds N8N automation flows, custom AI assistants, and full automation systems from scratch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right info -->
+      <div class="about-right">
+        <div class="label reveal">Profile</div>
+        <h2 class="section-title reveal">About <span>Sidney</span></h2>
+
+        <p class="about-bio reveal">
+          IT professional with extensive experience in <strong>network administration, firewall and switch
+          management, systems management, and technical support</strong>. Hands-on with enterprise firewalls
+          including <strong>SonicWall, Sophos, pfSense, OPNsense, and Linux Firewall</strong>, plus <strong>Cisco,
+          Huawei, and Dell</strong> core switches. Certified Google Workspace Administrator handling user provisioning,
+          password resets, content management, and organization-level settings. Proficient across
+          <strong>Windows, Linux, and macOS</strong> (daily Mac user).
+        </p>
+
+        <p class="about-bio reveal">
+          Experienced in <strong>CCTV and physical security</strong> systems including Axis, Hikvision, Dahua, and
+          Huawei cameras, with setup of <strong>HikCentral, iVMS-4200, and Door Access Control</strong>. A true
+          <strong>tech-savvy vibe coder</strong> who uses <strong>Claude, Codex, Gemini, GitHub Copilot</strong>,
+          and <strong>N8N</strong> to build automation flows, AI assistants, and real-world automation systems.
+          Sets up and manages <strong>websites, domains, cloud hosting, Cloudflare</strong>, and cloud servers
+          end-to-end. Currently serving as <strong>IT Operations Supervisor</strong>, aligning technology with business goals.
+        </p>
+
+        <div class="about-info-grid reveal">
+          <div class="info-row">
+            <span class="info-key">Full Name</span>
+            <span class="info-val">Sidney Losbañes</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Current Role</span>
+            <span class="info-val">Technical Operations Supervisor</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Location</span>
+            <span class="info-val">Lapu-Lapu City, Cebu, PH</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Phone</span>
+            <span class="info-val"><a href="tel:+639947076423">+63-9947076423</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Email</span>
+            <span class="info-val"><a href="mailto:sclosbanes@gmail.com">sclosbanes@gmail.com</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Certification</span>
+            <span class="info-val">Google Workspace Admin</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Experience</span>
+            <span class="info-val">18+ Years in IT</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">AI Tools</span>
+            <span class="info-val" style="color:var(--cyan);">Claude · Codex · Gemini · Copilot</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Specialization</span>
+            <span class="info-val">Vibe Coder · Cloud &amp; Domain Setup</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Availability</span>
+            <span class="info-val" style="color:var(--success);">Open to Opportunities</span>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <a href="#contact" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> Contact Me
+          </a>
+          <a href="SCLOSBANES_RESUME.pdf" download class="btn btn-outline" style="margin-left:10px;">
+            <i class="fa-solid fa-download"></i> Download CV
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     FEATURED SOLUTIONS
+============================================= -->
+<section class="section section-alt" id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label">Featured Work</div>
+      <h2 class="section-title">Full-Stack &amp; <span>AI Systems</span></h2>
+      <p class="section-sub">End-to-end applications architected and deployed with a focus on automation and user experience.</p>
+    </div>
+
+    <div class="project-grid">
+      <!-- Project 1: Rent A Car -->
+      <div class="project-card reveal">
+        <div class="project-tag">Full-Stack Platform</div>
+        <div class="project-icon"><i class="fa-solid fa-car"></i></div>
+        <h3>BNR Rent A Car Engine</h3>
+        <p>A high-performance vehicle management and booking system. Featured real-time inventory tracking, complex scheduling logic, and a premium customer UI. Fully deployed and managed as a production environment.</p>
+        <div class="project-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">Server Admin</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Cloud Deployment</span>
+        </div>
+      </div>
+
+      <!-- Project 2: AI Inventory -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-tag">AI Engineering</div>
+        <div class="project-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <h3>AI-Integrated Inventory</h3>
+        <p>An intelligent asset management system utilizing AI for predictive analytics, automated stock alerting, and smart categorization. Built to optimize large-scale technical inventory workflows.</p>
+        <div class="project-tech">
+            <span class="tech-tag">AI Automation</span>
+            <span class="tech-tag">Python/Logic</span>
+            <span class="tech-tag">API Integration</span>
+            <span class="tech-tag">n8n</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     WORK EXPERIENCE
+============================================= -->
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="label">Career History</div>
+      <h2 class="section-title">Work <span>Experience</span></h2>
+      <p class="section-sub">18+ years of progressive IT experience across multiple industries and leadership roles.</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- ── 1. Archangel Technologies (Current) ── -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot current"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-company">Archangel Technologies Inc.</div>
+            </div>
+            <span class="timeline-period current-badge">
+              <i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> June 2022 – Present
+            </span>
+          </div>
+
+          <div class="timeline-roles">
+
+            <!-- Role 1 -->
+            <div class="timeline-role">
+              <div class="timeline-role-header">
+                <span class="role-title">Technical Operation Supervisor</span>
+                <span class="role-period">May 2023 – Present</span>
+              </div>
+              <ul class="timeline-desc">
+                <li>Lead and mentor the IT team to ensure smooth daily operations, resolve technical issues, and enhance team performance through regular evaluations.</li>
+                <li>Manage Google Workspace, network infrastructure, firewalls, VPNs, and server backups using Veeam, scripts, and manual methods.</li>
+                <li>Oversee NAS storage, RAID systems, and ensure optimal network device performance.</li>
+                <li>Lead IT projects including installations, relocations, and upgrades, ensuring timely delivery aligned with company goals.</li>
+                <li>Prepare reports on IT operations, performance, and compliance with organizational policies.</li>
+              </ul>
+            </div>
+
+            <!-- Role 2 -->
+            <div class="timeline-role">
+              <div class="timeline-role-header">
+                <span class="role-title">IT Specialist</span>
+                <span class="role-period">June 2022 – May 2023</span>
+              </div>
+              <ul class="timeline-desc">
+                <li>Troubleshot hardware/software issues and provided helpdesk support to minimize downtime and ensure client satisfaction.</li>
+                <li>Deployed and configured workstations, maintained office network systems, and monitored critical IT equipment.</li>
+                <li>Managed inventory, conducted system checks, and coordinated IT equipment repairs and replacements.</li>
+                <li>Assisted in IT projects including installations and office relocations.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 2. Highland Amusement Center ── -->
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div class="timeline-company">Highland Amusement Center</div>
+            <span class="timeline-period">March 2022 – May 2022</span>
+          </div>
+          <div class="timeline-single-role">IT Specialist</div>
+          <ul class="timeline-desc">
+            <li>Managed hardware and software applications, troubleshooting computers across 12 branches.</li>
+            <li>Installed, set up, and configured on-site systems including CCTV, wireless and non-wireless networks, displays, and computers.</li>
+            <li>Ensured network security and developed proactive procedures for issue prevention and resolution.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── 3. Freelance – Flyff Private Server Project ── -->
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card freelance">
+          <div class="timeline-header">
+            <div>
+              <div class="freelance-badge">
+                <i class="fa-solid fa-gamepad"></i> Freelance / Self-Managed Project
+              </div>
+              <div class="timeline-company">Flyff Private Server: Full Stack Setup &amp; Admin</div>
+            </div>
+            <span class="timeline-period">November 2009 – January 2022</span>
+          </div>
+          <div class="timeline-single-role">Game Server Administrator, Developer &amp; Technical Support</div>
+
+          <!-- Tech stack used -->
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 14px;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-server"></i> VPS / Dedicated</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-database"></i> MSSQL</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-globe"></i> IIS</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-brands fa-php"></i> PHP / XAMPP</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-link"></i> ODBC</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-download"></i> Patcher / Launcher</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-gamepad"></i> Flyff Game Mods</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-people-group"></i> Community Management</span>
+          </div>
+
+          <ul class="timeline-desc">
+            <li>Fully set up and managed a <strong>Flyff private server</strong> on cloud-based Dedicated Servers and VPS environments, covering everything from OS installation to live gameplay, over 12+ years.</li>
+            <li>Installed and configured <strong>MSSQL</strong> databases and connected them to the game server and web systems via <strong>ODBC</strong>, ensuring reliable data flow between all components.</li>
+            <li>Deployed and managed the web stack using <strong>XAMPP, PHP, and IIS</strong> to run the game website, registration portal, and player management systems.</li>
+            <li>Built and maintained custom <strong>game patchers and launchers</strong> for client-side file distribution and auto-updates to the player base.</li>
+            <li>Applied <strong>game modifications and content updates</strong> including custom systems, gameplay adjustments, item configurations, and event setups directly on the server.</li>
+            <li>Handled <strong>Windows Firewall</strong> rules, port configurations, and server hardening to keep the game environment secure and accessible.</li>
+            <li>Performed daily <strong>MSSQL database backups</strong> for all player accounts and server data, maintaining uptime and data integrity throughout the project lifecycle.</li>
+            <li>Provided technical support and player assistance via forums, email, and chat, resolving account issues, gameplay bugs, and server-side problems.</li>
+            <li>Built and managed an active <strong>player community</strong>, organizing in-game events, handling player feedback, enforcing server rules, and growing community engagement across platforms.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── 4. Dynamic Castings ── -->
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div class="timeline-company">Dynamic Castings</div>
+            <span class="timeline-period">November 2007 – November 2009</span>
+          </div>
+          <div class="timeline-single-role">IT Specialist</div>
+
+          <!-- Tech stack used -->
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 14px;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-wifi"></i> ISP / Wireless Access</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-network-wired"></i> LAN / WAN</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-server"></i> Back-Office Servers</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-desktop"></i> Workstations</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;"><i class="fa-solid fa-shield-halved"></i> Network Security</span>
+          </div>
+
+          <ul class="timeline-desc">
+            <li>Managed the overall network infrastructure covering <strong>ISP connections, wireless access points, and full LAN/WAN</strong> setup and maintenance for the organization.</li>
+            <li>Administered and maintained <strong>back-office servers</strong> and the back-office system, ensuring stable operation, data availability, and system reliability across departments.</li>
+            <li>Managed hardware and software for workstations and network devices, handling virus/malware protection and enforcing network security policies.</li>
+            <li>Configured and maintained network data communications equipment, resolving connectivity issues and ensuring uptime across all systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── 5. Alliance Software Inc. ── -->
+      <div class="timeline-item reveal reveal-delay-4">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div class="timeline-company">Alliance Software Inc.</div>
+            <span class="timeline-period">October 2006 – October 2007</span>
+          </div>
+          <div class="timeline-single-role">Technical Support (Dual Training System)</div>
+          <ul class="timeline-desc">
+            <li>Implemented technical tasks as specified by project proponents and assigned supervisors.</li>
+            <li>Executed software development work covering programming, design, unit/product testing, and documentation.</li>
+            <li>Deployed patch fixes for POS and back-office systems to clients.</li>
+            <li>Troubleshot and configured Sybase to SQL database connections for multi-client setups.</li>
+            <li>Created installation reports along with documentation of accomplishments.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div>
+</section>
+
+<!-- =============================================
+     SKILLS
+============================================= -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="label">Expertise</div>
+      <h2 class="section-title">Technical <span>Skills</span></h2>
+      <p class="section-sub">A deep and high-grade technical skillset spanning 18+ years: SonicWall/Sophos/pfSense firewalls, Cisco/Huawei/Dell switches, Hikvision/Dahua/Axis CCTV, Dell servers, N8N automation, AI assistant building, cloud hosting, and more.</p>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Skill Bars (Left) -->
+      <div class="skill-bars reveal">
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Network Administration &amp; Security</span>
+            <span class="skill-bar-pct">97%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="97"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Firewalls &amp; Security Appliances</span>
+            <span class="skill-bar-pct">95%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="95"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Google Workspace Administration</span>
+            <span class="skill-bar-pct">90%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="90"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Cloud Hosting, Domain &amp; Cloudflare</span>
+            <span class="skill-bar-pct">88%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="88"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">AI Tools &amp; Vibe Coding</span>
+            <span class="skill-bar-pct">87%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="87" style="background:linear-gradient(90deg,#06b6d4,#8b5cf6);"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">IT Infrastructure &amp; Server Management</span>
+            <span class="skill-bar-pct">95%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="95"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Technical Support &amp; Helpdesk</span>
+            <span class="skill-bar-pct">98%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="98"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">CCTV, Surveillance &amp; Door Access</span>
+            <span class="skill-bar-pct">90%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="90"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Automation &amp; AI System Building</span>
+            <span class="skill-bar-pct">86%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="86" style="background:linear-gradient(90deg,#8b5cf6,#06b6d4);"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Server Backup &amp; Recovery (Veeam)</span>
+            <span class="skill-bar-pct">88%</span>
+          </div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-width="88"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tag Cloud (Right) -->
+      <div class="skill-categories reveal reveal-delay-2">
+
+        <!-- AI Tools & Automation -->
+        <div>
+          <div class="skill-cat-title" style="color:var(--cyan);">🤖 AI Tools, Vibe Coding &amp; Automation</div>
+          <div class="skill-tags">
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-brain"></i> Claude (Anthropic)</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-brands fa-github"></i> GitHub Copilot / Codex</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-brands fa-google"></i> Gemini AI</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-robot"></i> AI Assistant Creation</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Engineering</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-diagram-project"></i> N8N Automation</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-gears"></i> Automation System Building</span>
+            <span class="skill-tag" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);"><i class="fa-solid fa-code"></i> Vibe Coding</span>
+          </div>
+        </div>
+
+        <!-- Web & Cloud -->
+        <div>
+          <div class="skill-cat-title">☁️ Web, Cloud &amp; Domain</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-globe"></i> Website Setup</span>
+            <span class="skill-tag"><i class="fa-solid fa-at"></i> Domain Config &amp; DNS</span>
+            <span class="skill-tag"><i class="fa-solid fa-cloud"></i> Cloud Hosting</span>
+            <span class="skill-tag"><i class="fa-solid fa-shield-halved"></i> Cloudflare CDN &amp; DDoS</span>
+            <span class="skill-tag"><i class="fa-solid fa-lock"></i> SSL / HTTPS Setup</span>
+            <span class="skill-tag"><i class="fa-solid fa-server"></i> VPS / Dedicated Servers</span>
+            <span class="skill-tag"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud Server Management</span>
+          </div>
+        </div>
+
+        <!-- Google Workspace -->
+        <div>
+          <div class="skill-cat-title">📧 Google Workspace</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-user-plus"></i> Add &amp; Manage Users</span>
+            <span class="skill-tag"><i class="fa-solid fa-key"></i> Password Reset &amp; Recovery</span>
+            <span class="skill-tag"><i class="fa-solid fa-building"></i> Org Unit Management</span>
+            <span class="skill-tag"><i class="fa-solid fa-gear"></i> Admin Console Settings</span>
+            <span class="skill-tag"><i class="fa-solid fa-envelope"></i> Gmail &amp; Drive Policies</span>
+            <span class="skill-tag"><i class="fa-solid fa-sitemap"></i> Domain &amp; MX Records</span>
+          </div>
+        </div>
+
+        <!-- Firewalls -->
+        <div>
+          <div class="skill-cat-title">🔥 Firewalls &amp; Security Appliances</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-fire-flame-curved"></i> SonicWall</span>
+            <span class="skill-tag"><i class="fa-solid fa-fire-flame-curved"></i> Sophos</span>
+            <span class="skill-tag"><i class="fa-brands fa-linux"></i> Linux Firewall (iptables)</span>
+            <span class="skill-tag"><i class="fa-solid fa-fire"></i> pfSense</span>
+            <span class="skill-tag"><i class="fa-solid fa-fire"></i> OPNsense</span>
+            <span class="skill-tag"><i class="fa-solid fa-lock"></i> VPN Setup &amp; Management</span>
+            <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> DHCP (Windows &amp; Linux)</span>
+          </div>
+        </div>
+
+        <!-- Switches & Network Hardware -->
+        <div>
+          <div class="skill-cat-title">🔌 Switches &amp; Network Hardware</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-network-wired"></i> Cisco Switches</span>
+            <span class="skill-tag"><i class="fa-solid fa-network-wired"></i> Huawei Switches</span>
+            <span class="skill-tag"><i class="fa-solid fa-network-wired"></i> Dell Switches</span>
+            <span class="skill-tag"><i class="fa-solid fa-wifi"></i> ISP &amp; Wireless Access Points</span>
+            <span class="skill-tag"><i class="fa-solid fa-tower-broadcast"></i> LAN / WAN Management</span>
+            <span class="skill-tag"><i class="fa-solid fa-network-wired"></i> CCNA 1–4</span>
+          </div>
+        </div>
+
+        <!-- CCTV & Physical Security -->
+        <div>
+          <div class="skill-cat-title">📹 CCTV &amp; Physical Security</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-video"></i> Axis Cameras</span>
+            <span class="skill-tag"><i class="fa-solid fa-video"></i> Hikvision (HiVision)</span>
+            <span class="skill-tag"><i class="fa-solid fa-video"></i> Dahua</span>
+            <span class="skill-tag"><i class="fa-solid fa-video"></i> Huawei CCTV</span>
+            <span class="skill-tag"><i class="fa-solid fa-desktop"></i> HikCentral VMS</span>
+            <span class="skill-tag"><i class="fa-solid fa-display"></i> iVMS-4200</span>
+            <span class="skill-tag"><i class="fa-solid fa-door-closed"></i> Door Access Control</span>
+            <span class="skill-tag"><i class="fa-solid fa-chart-line"></i> Infra Monitoring</span>
+          </div>
+        </div>
+
+        <!-- OS -->
+        <div>
+          <div class="skill-cat-title">💻 Operating Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-brands fa-windows"></i> Windows Server</span>
+            <span class="skill-tag"><i class="fa-brands fa-windows"></i> Windows 10/11</span>
+            <span class="skill-tag"><i class="fa-brands fa-linux"></i> Linux (Admin)</span>
+            <span class="skill-tag"><i class="fa-brands fa-apple"></i> macOS (Daily User)</span>
+          </div>
+        </div>
+
+        <!-- Infrastructure & Storage -->
+        <div>
+          <div class="skill-cat-title">🗄️ Infrastructure &amp; Storage</div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-server"></i> Dell Servers</span>
+            <span class="skill-tag"><i class="fa-solid fa-hard-drive"></i> NAS &amp; RAID</span>
+            <span class="skill-tag"><i class="fa-solid fa-database"></i> MSSQL / Sybase</span>
+            <span class="skill-tag"><i class="fa-solid fa-cloud-arrow-up"></i> Veeam Backup</span>
+            <span class="skill-tag"><i class="fa-solid fa-microchip"></i> Workstation Deploy</span>
+            <span class="skill-tag"><i class="fa-solid fa-server"></i> Back-Office Servers</span>
+            <span class="skill-tag"><i class="fa-solid fa-gauge-high"></i> Infrastructure Monitoring</span>
+          </div>
+        </div>
+
+        <!-- Community & Support -->
+        <div>
+          <div class="skill-cat-title" style="color:var(--gold);">🏆 Community &amp; Support</div>
+          <div class="skill-tags">
+            <span class="skill-tag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-people-group"></i> Community Management</span>
+            <span class="skill-tag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-calendar-star"></i> Event Organising</span>
+            <span class="skill-tag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-headset"></i> Player / Customer Support</span>
+            <span class="skill-tag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-comments"></i> Forum &amp; Chat Moderation</span>
+            <span class="skill-tag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;"><i class="fa-solid fa-shield-halved"></i> Rules Enforcement</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     EDUCATION
+============================================= -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="label">Academic Background</div>
+      <h2 class="section-title">Education &amp; <span>Training</span></h2>
+    </div>
+
+    <div class="edu-grid">
+
+      <!-- College -->
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-card-top">
+          <div class="edu-icon hi-blue"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div>
+            <div class="edu-type" style="color:var(--blue);">College</div>
+            <div class="edu-school">CITE Technical Institute Inc.</div>
+          </div>
+        </div>
+        <div class="edu-program">Bachelor of Computer Technology</div>
+        <div class="edu-meta">
+          <span class="edu-badge year"><i class="fa-regular fa-calendar"></i> 2004 – 2006</span>
+          <span class="edu-badge award"><i class="fa-solid fa-award"></i> College Scholar</span>
+        </div>
+      </div>
+
+      <!-- CCNA -->
+      <div class="edu-card reveal reveal-delay-2">
+        <div class="edu-card-top">
+          <div class="edu-icon hi-violet"><i class="fa-solid fa-certificate"></i></div>
+          <div>
+            <div class="edu-type" style="color:var(--violet);">Certification</div>
+            <div class="edu-school">Cisco Networking Academy</div>
+          </div>
+        </div>
+        <div class="edu-program">CCNA 1, 2, 3 &amp; 4 Full Track<br />CITE Technical Institute Inc.</div>
+        <div class="edu-meta">
+          <span class="edu-badge year"><i class="fa-regular fa-calendar"></i> 2004 – 2006</span>
+          <span class="edu-badge cert"><i class="fa-solid fa-network-wired"></i> Cisco Certified</span>
+        </div>
+      </div>
+
+      <!-- High School -->
+      <div class="edu-card reveal reveal-delay-3">
+        <div class="edu-card-top">
+          <div class="edu-icon hi-cyan"><i class="fa-solid fa-school"></i></div>
+          <div>
+            <div class="edu-type" style="color:var(--cyan);">High School</div>
+            <div class="edu-school">Badian National High School</div>
+          </div>
+        </div>
+        <div class="edu-program">Badian, Cebu, Philippines</div>
+        <div class="edu-meta">
+          <span class="edu-badge year"><i class="fa-regular fa-calendar"></i> 2000 – 2004</span>
+        </div>
+      </div>
+
+      <!-- Elementary -->
+      <div class="edu-card reveal reveal-delay-4">
+        <div class="edu-card-top">
+          <div class="edu-icon hi-green"><i class="fa-solid fa-book-open"></i></div>
+          <div>
+            <div class="edu-type" style="color:var(--success);">Elementary</div>
+            <div class="edu-school">Busay Elementary School</div>
+          </div>
+        </div>
+        <div class="edu-program">Moalboal, Cebu, Philippines</div>
+        <div class="edu-meta">
+          <span class="edu-badge year"><i class="fa-regular fa-calendar"></i> 1994 – 2000</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     REFERENCE
+============================================= -->
+<section class="section section-alt" id="reference">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px; text-align:center;">
+      <div class="label" style="justify-content:center;">Professional Reference</div>
+      <h2 class="section-title" style="text-align:center;">Character <span>Reference</span></h2>
+    </div>
+
+    <div class="ref-wrapper reveal">
+      <div class="ref-card">
+        <div class="ref-quote-icon">
+          <i class="fa-solid fa-quote-left"></i>
+        </div>
+        <div class="ref-avatar">JA</div>
+        <div class="ref-name">Joseph John Acosta</div>
+        <div class="ref-title">System Administrator</div>
+        <div class="ref-company">STAFF DOMAIN INC.</div>
+        <a href="tel:+639177244125" class="ref-phone">
+          <i class="fa-solid fa-phone"></i>
+          +63-9177244125
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     CONTACT / CTA
+============================================= -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="label reveal">Get in Touch</div>
+      <h2 class="section-title reveal">Let's <span>Connect</span></h2>
+      <p class="section-sub reveal">
+        I'm currently open to new IT leadership opportunities and technical roles.
+        Feel free to reach out via any of the methods below.
+      </p>
+
+      <div class="contact-methods reveal">
+        <a href="mailto:sclosbanes@gmail.com" class="contact-chip">
+          <i class="fa-solid fa-envelope"></i>
+          sclosbanes@gmail.com
+        </a>
+        <a href="tel:+639947076423" class="contact-chip">
+          <i class="fa-solid fa-phone"></i>
+          +63-9947076423
+        </a>
+        <div class="contact-chip" style="cursor:default;">
+          <i class="fa-solid fa-location-dot"></i>
+          Lapu-Lapu City, Cebu, PH
+        </div>
+      </div>
+
+      <div class="contact-actions reveal">
+        <a href="mailto:sclosbanes@gmail.com" class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane"></i> Send an Email
+        </a>
+        <!-- Update the href below to the actual PDF file path if hosting online -->
+        <a href="SCLOSBANES_RESUME.pdf" download class="btn btn-outline">
+          <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer class="footer">
+  <p class="footer-text">
+    &copy; 2025 <span>Sidney Losbañes</span> · Senior IT Specialist · Lapu-Lapu City, Cebu, Philippines
+  </p>
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+  /* ──────────────────────────────────────
+     1. Navbar scroll effect
+  ────────────────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ──────────────────────────────────────
+     2. Hamburger / mobile nav
+  ────────────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
+
+  function closeMobile() {
+    mobileNav.classList.remove('open');
+  }
+
+  /* ──────────────────────────────────────
+     3. Scroll reveal (IntersectionObserver)
+  ────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ──────────────────────────────────────
+     4. Animated skill bars
+     - Triggered once when the skills section
+       scrolls into view
+     - Reads data-width attribute on each fill
+  ────────────────────────────────────── */
+  const skillSection = document.getElementById('skills');
+  let skillsAnimated = false;
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !skillsAnimated) {
+      skillsAnimated = true;
+      document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  }, { threshold: 0.2 });
+
+  skillObserver.observe(skillSection);
+
+  /* ──────────────────────────────────────
+     5. Active nav link on scroll
+  ────────────────────────────────────── */
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) {
+        current = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current
+        ? 'var(--white)'
+        : '';
+    });
+  });
+
+  const sw = document.getElementById('theme-switch');
+  const b = document.body;
+  if(localStorage.getItem('theme') === 'light-mode') b.classList.add('light-mode');
+  sw.addEventListener('click', () => {
+    b.classList.toggle('light-mode');
+    localStorage.setItem('theme', b.classList.contains('light-mode') ? 'light-mode' : '');
+  });
+
+  function downloadPDF() {
+    window.print();
+  }
+</script>
+
+<a href="executive-resume.html" class="theme-switch" style="position: fixed; bottom: 20px; right: 20px; border-radius: 50%; z-index: 1100; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Download Executive CV">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+</a>
+
+</body>
+</html>

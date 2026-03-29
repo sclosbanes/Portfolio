@@ -1,0 +1,51 @@
+name: Sidney Executive Deployment (Auto-Push)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Secure Handshake & Docker Build on VM
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        password: ${{ secrets.VM_PASSWORD }}
+        script: |
+          cd ~/portfolio
+          # Pull latest (Internal rsync alternative via GitHub)
+          # Note: In a real CI, we might push the image, but for efficiency, 
+          # we trigger the build on the VM.
+          # We'll sync via the SSH Session itself if needed.
+          
+    - name: Deploy via Rsync over SSH
+      uses: easingthemes/ssh-deploy@v5.1.0
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.VM_SSH_KEY }}
+        ARGS: "-avz --delete"
+        SOURCE: "./"
+        REMOTE_HOST: ${{ secrets.VM_HOST }}
+        REMOTE_USER: ${{ secrets.VM_USER }}
+        TARGET: "~/portfolio"
+        EXCLUDE: "/.git/, /.github/"
+
+    - name: Execute Docker Lifecycle on VM
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        password: ${{ secrets.VM_PASSWORD }}
+        script: |
+          cd ~/portfolio
+          sudo docker build -t sidney-portfolio .
+          sudo docker stop sidney-app || true
+          sudo docker rm sidney-app || true
+          sudo docker run -d --name sidney-app -p 127.0.0.1:8099:80 --restart always sidney-portfolio
+          sudo systemctl reload nginx

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidney Losbañes | Standard Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background: #f1f5f9;
+            padding: 40px 20px;
+        }
+
+        .resume-page {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .name-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .name-title p {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .contact-info p { margin-bottom: 2px; }
+
+        section { margin-bottom: 25px; }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .summary p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .experience-item { margin-bottom: 18px; }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .exp-sub {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            margin-left: 18px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        li { margin-bottom: 4px; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .skill-cat { font-size: 0.9rem; }
+        .skill-cat strong { color: var(--text-dark); font-weight: 700; }
+
+        .education-item { margin-bottom: 10px; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .resume-page { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .no-print { display: none !important; }
+        }
+
+        /* Buttons toggle */
+        .btn-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home { background: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="btn-container no-print">
+        <a href="index.html" class="btn btn-home">Back to Hub</a>
+        <button onclick="window.print()" class="btn">Download PDF</button>
+    </div>
+
+    <div class="resume-page">
+        <header>
+            <div class="name-title">
+                <h1>Sidney Losbañes</h1>
+                <p>Senior IT Specialist | Technical Operations Supervisor</p>
+            </div>
+            <div class="contact-info">
+                <p>+63-9947076423</p>
+                <p>sclosbanes@gmail.com</p>
+                <p>Lapu-Lapu City, Cebu, PH</p>
+            </div>
+        </header>
+
+        <section class="summary">
+            <h2>Professional Profile</h2>
+            <p>IT professional with 18+ years of hands-on experience in network administration, systems management, and technical leadership. Certified Google Workspace Administrator with deep expertise in firewall management (SonicWall, pfSense) and infrastructure maintenance. Proven track record of optimizing IT operations and mentoring technical teams.</p>
+        </section>
+
+        <section class="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span>Technical Operation Supervisor</span>
+                    <span>2023 – Present</span>
+                </div>
+                <div class="exp-sub">
+                    <span>Archangel Technologies Inc.</span>
+                    <span>Cebu, PH</span>
+                </div>
+                <ul>
+                    <li>Lead IT team operations, ensuring 24/7 system availability and high performance.</li>
+                    <li>Manage enterprise firewalls (SonicWall, Sophos), VPNs, and load balancing.</li>
+                    <li>Oversee backup strategies (Veeam) and disaster recovery planning.</li>
+                    <li>Conduct regular security audits and maintain infrastructure compliance.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span>IT Specialist</span>
+                    <span>2022 – 2023</span>
+                </div>
+                <div class="exp-sub">
+                    <span>Archangel Technologies Inc.</span>
+                    <span>Cebu, PH</span>
+                </div>
+                <ul>
+                    <li>Optimized network performance across multiple office branches.</li>
+                    <li>Deployed workstations and managed local server instances.</li>
+                    <li>Provided senior-level technical support for hardware and software systems.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span>IT Admin & Developer (Freelance Project)</span>
+                    <span>2010 – 2022</span>
+                </div>
+                <div class="exp-sub">
+                    <span>Flyff Game Server Infrastructure</span>
+                    <span>Remote</span>
+                </div>
+                <ul>
+                    <li>Architected and managed high-concurrency cloud game servers for 12 years.</li>
+                    <li>Administered MSSQL databases, ensuring data integrity and high uptime.</li>
+                    <li>Developed custom automation scripts and community web portals (PHP/IIS).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-cat">
+                    <strong>Networking:</strong> SonicWall, Sophos, pfSense, Cisco/Huawei Switches, VPN, DHCP, DNS.
+                </div>
+                <div class="skill-cat">
+                    <strong>Admin Tools:</strong> Google Workspace Admin, Veeam, Cloudflare, N8N Automation.
+                </div>
+                <div class="skill-cat">
+                    <strong>Systems:</strong> Windows Server, Linux (Ubuntu/CentOS), macOS Environment.
+                </div>
+                <div class="skill-cat">
+                    <strong>Emerging Tech:</strong> AI Vibe Coding (Claude, Gemini, Codex), GitHub Copilot.
+                </div>
+            </div>
+        </section>
+
+        <section class="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="exp-header">
+                    <span>B. Computer Technology</span>
+                    <span>2006</span>
+                </div>
+                <div class="exp-sub">
+                    <span>CITE Technical Institute Inc.</span>
+                    <span>Cebu, PH</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="exp-header">
+                    <span>CCNA Certification (1-4)</span>
+                    <span>2006</span>
+                </div>
+                <div class="exp-sub">
+                    <span>Cisco Networking Academy</span>
+                    <span>Cebu, PH</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
