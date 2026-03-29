@@ -273,9 +273,14 @@
 
     <nav>
         <div class="logo">SL</div>
-        <div class="theme-btn" id="theme-btn">
-            <i class="fa-solid fa-moon moon-icon"></i>
-            <i class="fa-solid fa-sun sun-icon"></i>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <a href="https://github.com/sclosbanes" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--secondary)'">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <div class="theme-btn" id="theme-btn">
+                <i class="fa-solid fa-moon moon-icon"></i>
+                <i class="fa-solid fa-sun sun-icon"></i>
+            </div>
         </div>
     </nav>
 
@@ -308,6 +313,18 @@
                 <i class="fa-solid fa-brain"></i>
                 <h3>Deep Architecture</h3>
                 <span>Strategic server infrastructure coupled with cutting-edge AI integrations.</span>
+            </a>
+        </div>
+
+        <div style="margin-top: 40px; display: flex; gap: 30px; opacity: 0; animation: revealUp 1s var(--transition) forwards 1s;">
+            <a href="https://fish.archsystems.online" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--secondary)'">
+                <i class="fa-solid fa-satellite-dish"></i> Project Tracker
+            </a>
+            <a href="https://bnr.archsystems.online" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--secondary)'">
+                <i class="fa-solid fa-car"></i> Car Rental
+            </a>
+            <a href="https://lemon.archsystems.online" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--secondary)'">
+                <i class="fa-solid fa-gamepad"></i> Flyff Game
             </a>
         </div>
 
