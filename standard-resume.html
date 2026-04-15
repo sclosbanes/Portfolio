@@ -130,6 +130,15 @@
             .no-print { display: none !important; }
         }
 
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .resume-page { padding: 25px; }
+            header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .contact-info { text-align: left; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .exp-header, .exp-sub { flex-direction: column; }
+        }
+
         /* Buttons toggle */
         .btn-container {
             position: fixed;
@@ -269,6 +278,16 @@
                 <div class="exp-sub">
                     <span>Cisco Networking Academy</span>
                     <span>Cebu, PH</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="exp-header">
+                    <span>Professional Google Workspace Administrator</span>
+                    <span>Feb 2026 – Mar 2026</span>
+                </div>
+                <div class="exp-sub">
+                    <span>Google Cloud Certified</span>
+                    <span>Online</span>
                 </div>
             </div>
         </section>

@@ -208,6 +208,15 @@
             .no-print { display: none !important; }
         }
 
+        @media (max-width: 900px) {
+            body { padding: 20px 10px; }
+            .resume-paper { flex-direction: column; width: 100%; }
+            .sidebar { width: 100%; padding: 40px 30px; border-right: none; border-bottom: 3px solid #eee; }
+            .main-content { width: 100%; padding: 40px 30px; }
+            header h1 { font-size: 2.5rem; }
+            .exp-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+
         /* Float Buttons */
         .controls {
             position: fixed;
@@ -342,6 +351,11 @@
                 <div class="edu-item">
                     <h3>CCNA 1-4 Certification</h3>
                     <p>Cisco Networking Academy | 2006</p>
+                </div>
+
+                <div class="edu-item">
+                    <h3>Professional Google Workspace Administrator</h3>
+                    <p>Google Cloud Certified | Feb 23, 2026 – Mar 23, 2026</p>
                 </div>
             </div>
         </div>

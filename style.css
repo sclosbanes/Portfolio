@@ -450,6 +450,7 @@ h1, h2, h3 {
     .sidebar {
         border-right: none;
         border-bottom: 1px solid var(--glass-border);
+        padding: 40px 30px;
     }
     
     .profile-section {
@@ -460,6 +461,41 @@ h1, h2, h3 {
     .contact-info {
         justify-content: center;
         flex-wrap: wrap;
+    }
+
+    .resume-header {
+        padding: 40px 30px;
+    }
+
+    .main-content {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .resume-container {
+        margin: 20px 10px;
+        border-radius: 16px;
+    }
+    
+    .resume-header {
+        padding: 30px 20px;
+    }
+    
+    .sidebar {
+        padding: 30px 20px;
+    }
+    
+    .main-content {
+        padding: 30px 20px;
+    }
+
+    .name {
+        font-size: 2.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
 }
 
